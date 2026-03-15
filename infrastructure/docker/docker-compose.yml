@@ -1,0 +1,73 @@
+version: '3.9'
+services:
+  frontend:
+    build:
+      context: ../../
+      dockerfile: infrastructure/docker/frontend.Dockerfile
+    ports:
+      - "3000:3000"
+
+  api-gateway:
+    build:
+      context: ../../backend/services/api-gateway
+      dockerfile: ../../infrastructure/docker/backend-service.Dockerfile
+    environment:
+      - PORT=4000
+    ports:
+      - "4000:4000"
+
+  authentication-service:
+    build:
+      context: ../../backend/services/authentication-service
+      dockerfile: ../../infrastructure/docker/backend-service.Dockerfile
+    environment:
+      - PORT=4001
+    ports:
+      - "4001:4001"
+
+  client-service:
+    build:
+      context: ../../backend/services/client-service
+      dockerfile: ../../infrastructure/docker/backend-service.Dockerfile
+    environment:
+      - PORT=4002
+    ports:
+      - "4002:4002"
+
+  talent-service:
+    build:
+      context: ../../backend/services/talent-service
+      dockerfile: ../../infrastructure/docker/backend-service.Dockerfile
+    environment:
+      - PORT=4003
+    ports:
+      - "4003:4003"
+
+  partner-service:
+    build:
+      context: ../../backend/services/partner-service
+      dockerfile: ../../infrastructure/docker/backend-service.Dockerfile
+    environment:
+      - PORT=4004
+    ports:
+      - "4004:4004"
+
+  content-cms-service:
+    build:
+      context: ../../backend/services/content-cms-service
+      dockerfile: ../../infrastructure/docker/backend-service.Dockerfile
+    environment:
+      - PORT=4005
+    ports:
+      - "4005:4005"
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=bhr
+      - POSTGRES_PASSWORD=bhr
+      - POSTGRES_DB=bhr_platform
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../../database/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
