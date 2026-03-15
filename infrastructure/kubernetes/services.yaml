@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: bhr-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: bhr/api-gateway:latest
+          ports:
+            - containerPort: 4000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+  namespace: bhr-platform
+spec:
+  selector:
+    app: api-gateway
+  ports:
+    - port: 80
+      targetPort: 4000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentication-service
+  namespace: bhr-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentication-service
+  template:
+    metadata:
+      labels:
+        app: authentication-service
+    spec:
+      containers:
+        - name: authentication-service
+          image: bhr/authentication-service:latest
+          ports:
+            - containerPort: 4001
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-service
+  namespace: bhr-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-service
+  template:
+    metadata:
+      labels:
+        app: client-service
+    spec:
+      containers:
+        - name: client-service
+          image: bhr/client-service:latest
+          ports:
+            - containerPort: 4002
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: talent-service
+  namespace: bhr-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: talent-service
+  template:
+    metadata:
+      labels:
+        app: talent-service
+    spec:
+      containers:
+        - name: talent-service
+          image: bhr/talent-service:latest
+          ports:
+            - containerPort: 4003
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: partner-service
+  namespace: bhr-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: partner-service
+  template:
+    metadata:
+      labels:
+        app: partner-service
+    spec:
+      containers:
+        - name: partner-service
+          image: bhr/partner-service:latest
+          ports:
+            - containerPort: 4004
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: content-cms-service
+  namespace: bhr-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: content-cms-service
+  template:
+    metadata:
+      labels:
+        app: content-cms-service
+    spec:
+      containers:
+        - name: content-cms-service
+          image: bhr/content-cms-service:latest
+          ports:
+            - containerPort: 4005
