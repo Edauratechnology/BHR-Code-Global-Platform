@@ -14,3 +14,6 @@ Enterprise digital platform for BHR Code including corporate website, client por
 
 - Architecture blueprint: [`docs/enterprise-platform-architecture.md`](docs/enterprise-platform-architecture.md)
 - Initial structure guide: [`docs/initial-repository-structure.md`](docs/initial-repository-structure.md)
+## Architecture Plan
+
+- See the full enterprise architecture blueprint: [`docs/enterprise-platform-architecture.md`](docs/enterprise-platform-architecture.md)
